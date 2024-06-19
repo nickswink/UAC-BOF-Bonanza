@@ -1501,6 +1501,8 @@ extern "C" {
 #define RTL_USER_PROC_IMAGE_KEY_MISSING     0x00004000
 #define RTL_USER_PROC_OPTIN_PROCESS         0x00020000
 
+
+#define _In_bytecount_(x)
     /*
     ** Processes END
     */
@@ -6036,6 +6038,12 @@ extern "C" {
     } TEB_ACTIVE_FRAME, * PTEB_ACTIVE_FRAME;
 
 #define GDI_BATCH_BUFFER_SIZE 310
+
+    typedef struct _PROCESSOR_NUMBER {  // added because WSL missing type
+        WORD Group;
+        BYTE Number;
+        BYTE Reserved;
+    } PROCESSOR_NUMBER, *PPROCESSOR_NUMBER;
 
     typedef struct _GDI_TEB_BATCH {
         ULONG	Offset;
@@ -11236,6 +11244,8 @@ extern "C" {
     * File API (+Driver&HotPatch).
     *
     ************************************************************************************/
+
+
 
     NTSYSAPI
         NTSTATUS

